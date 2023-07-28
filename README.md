@@ -8,3 +8,7 @@ Docker itself, and Docker-compose, which is an utility that let us easily organi
 Install package:
    
     sudo apt install  docker-compose
+Start Service:
+    
+    sudo systemctl enable --now docker
+    
