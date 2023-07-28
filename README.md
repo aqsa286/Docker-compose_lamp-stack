@@ -106,55 +106,42 @@ Defining the MariaDB service:
 
 
 Bonus – phpMyAdmin:
-             
-            Our basic LAMP stack should now be complete. As a bonus, we may want to add phpMyAdmin to it, in order to easily control our MariaDB database from a user-friendly web interface.
+    Our basic LAMP stack should now be complete. As a bonus, we may want to add phpMyAdmin to it, in order to easily control our MariaDB database from a user-friendly web interface.
 Let’s add the related service definition to our docker-compose configuration:
 
+    version: '3.7'
 
+    services:
+       php-httpd:
+           image: php:7.3-apache
+           ports:
+              - 80:80
+           volumes:
+              - "./DocumentRoot:/var/www/html"
 
+       mariadb:
+           image: mariadb:10.5.2
+           volumes:
+              - mariadb-volume:/var/lib/mysql
+           environment:
+              TZ: "Europe/Rome"
+              MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+              MYSQL_ROOT_PASSWORD: "rootpwd"
+              MYSQL_USER: 'testuser'
+              MYSQL_PASSWORD: 'testpassword'
+              MYSQL_DATABASE: 'testdb'
 
+       phpmyadmin:
+           image: phpmyadmin/phpmyadmin
+           links:
+              - 'mariadb:db'
+           ports:
+              - 8081:80
+ 
+     volumes:
+         mariadb-volume:
 
-
-
-
-
-
-
-
-version: '3.7'
-
-services:
-    php-httpd:
-        image: php:7.3-apache
-        ports:
-            - 80:80
-        volumes:
-            - "./DocumentRoot:/var/www/html"
-
-    mariadb:
-        image: mariadb:10.5.2
-        volumes:
-            - mariadb-volume:/var/lib/mysql
-        environment:
-            TZ: "Europe/Rome"
-            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
-            MYSQL_ROOT_PASSWORD: "rootpwd"
-            MYSQL_USER: 'testuser'
-            MYSQL_PASSWORD: 'testpassword'
-            MYSQL_DATABASE: 'testdb'
-
-    phpmyadmin:
-        image: phpmyadmin/phpmyadmin
-        links:
-            - 'mariadb:db'
-        ports:
-            - 8081:80
-
-volumes:
-    mariadb-volume:
-
-
-                Cmd: sudo docker-compose up -d --build
+    sudo docker-compose up -d --build
 
 The phpMyAdmin interface will be therefore reachable at the localhost:8081 address. 
 
