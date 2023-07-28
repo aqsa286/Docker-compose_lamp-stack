@@ -1,1 +1,1 @@
-Create a lamp stack using docker compose 
+# Create a lamp stack using docker compose 
