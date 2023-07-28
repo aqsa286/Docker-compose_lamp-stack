@@ -26,44 +26,36 @@ Volumes
 Networks
 
 #### Services
-        A service definition contains the configuration that is applied to each container started for that service. Each service may also include a Build section, which defines how to create the Docker image for the service.
+  A service definition contains the configuration that is applied to each container started for that service. Each service may also include a Build section, which defines how to create the Docker image for the service.
 
-Volumes 
-        Docker volumes are dependent on Docker’s file system and are the preferred method of persisting data for Docker containers and services. When a container is started, Docker loads the read-only image layer, adds a read-write layer on top of the image stack, and mounts volumes onto the container filesystem.
+#### Volumes 
+  Docker volumes are dependent on Docker’s file system and are the preferred method of persisting data for Docker containers and services. When a container is started, Docker loads the read-only image layer, adds a read-write layer on top of the image stack, and mounts volumes onto the container filesystem.
 
-
-
-
-
-Networks
-        Docker includes a networking system for managing communications between containers, your Docker host, and the outside world. Several different network types are supported, facilitating a variety of common use cases.
+#### Networks
+  Docker includes a networking system for managing communications between containers, your Docker host, and the outside world. Several different network types are supported, facilitating a variety of common use cases.
 Step-3: Defining the php + httpd service.
     
-              The first service we will define in the configuration file will include PHP as the Apache web server module. 
+ The first service we will define in the configuration file will include PHP as the Apache web server module. 
  Let’s start writing our configuration:
 Change directory
-                  Cmd:  cd linuxconfig 
+        
+    cd linuxconfig 
 Create and edit file
-                  Cmd: nano docker-compose.yml
+   
+    nano docker-compose.yml
+
+    version: '3.7'
+
+    services:
+        php-httpd:
+            image: php:7.3-apache
+            ports:
+              - 80:80
+            volumes:
+              - "./DocumentRoot:/var/www/html"
 
 
-
-
-
-
-
-version: '3.7'
-
-services:
-    php-httpd:
-        image: php:7.3-apache
-        ports:
-            - 80:80
-        volumes:
-            - "./DocumentRoot:/var/www/html"
-
-
-               The first thing we specified in the configuration file is version. version 3.7 is the latest .
+The first thing we specified in the configuration file is version. version 3.7 is the latest .
 
 
 Step-4: 
