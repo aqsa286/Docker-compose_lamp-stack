@@ -1,1 +1,1 @@
-Lam-stack-Docker_compose
+Create a lamp stack using docker compose 
