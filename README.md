@@ -141,6 +141,7 @@ Let’s add the related service definition to our docker-compose configuration:
      volumes:
          mariadb-volume:
 
+
     sudo docker-compose up -d --build
 
 The phpMyAdmin interface will be therefore reachable at the localhost:8081 address. 
