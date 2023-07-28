@@ -156,40 +156,43 @@ Using a custom image for a service:
                For example, say we want to build the php-httpd service, but include an additional php extension: how can we do it? 
 On the root of the project, we define a new directory, and for convenience name it after the service:
  Create new directory
-                       Cmd: mkdir php-httpd
 
-       Inside this directory we create a Dockerfile.
+    mkdir php-httpd
+Inside this directory we create a Dockerfile.
 
 Change directory
-           Cmd:  cd php-httpd
+
+    cd php-httpd
 Create file
-           Cmd: nano Dockerfile
 
-FROM php:7.3-apache
-LABEL maintainer="egdoc.dev@gmail.com"
+    nano Dockerfile
+Dockerfile:
 
-RUN apt-get update && apt-get install -y libmcrypt-dev \
-    && pecl install mcrypt-1.0.2 \
-    && docker-php-ext-enable mcrypt
+    FROM php:7.3-apache
+    LABEL maintainer="egdoc.dev@gmail.com"
+
+    RUN apt-get update && apt-get install -y libmcrypt-dev \
+        && pecl install mcrypt-1.0.2 \
+        && docker-php-ext-enable mcrypt
 
 
 Back in our docker-compose.yml file, we modify the definition of the php-httpd service. We cannot reference the image directly as we did before. 
 Instead, we specify the directory containing our custom Dockerfile as the build context:
 
-              Cmd: nano docker-compose.yml
+    nano docker-compose.yml
 
 
-version: '3.7'
+    version: '3.7'
 
-services:
-    php-httpd:
-        build:
-            context: ./php-httpd
-        ports:
-            - 80:80
-        volumes:
-            - "./DocumentRoot:/var/www/html"
-[...]
+    services:
+       php-httpd:
+           build:
+               context: ./php-httpd
+           ports:
+              - 80:80
+           volumes:
+               - "./DocumentRoot:/var/www/html"
+      [...]
 
 
 
