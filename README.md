@@ -1,4 +1,4 @@
-##Create a lamp stack using docker compose 
+# #Create a lamp stack using docker compose 
 
 Step-1: Installing packages and starting the docker service.
         
