@@ -141,6 +141,7 @@ Let’s add the related service definition to our docker-compose configuration:
      volumes:
          mariadb-volume:
 
+The docker compose up command aggregates the output of each container
 
     sudo docker-compose up -d --build
 
@@ -153,7 +154,7 @@ We can login with the credentials we defined for our database service, and verif
 Now PhpMyAdmin homepage will appear here.
 
 Using a custom image for a service:
-               For example, say we want to build the php-httpd service, but include an additional php extension: how can we do it? 
+   For example, say we want to build the php-httpd service, but include an additional php extension: how can we do it? 
 On the root of the project, we define a new directory, and for convenience name it after the service:
  Create new directory
 
@@ -176,11 +177,11 @@ Dockerfile:
         && docker-php-ext-enable mcrypt
 
 
-Back in our docker-compose.yml file, we modify the definition of the php-httpd service. We cannot reference the image directly as we did before. 
-Instead, we specify the directory containing our custom Dockerfile as the build context:
+Back in our docker-compose.yml file, we modify the definition of the php-httpd service. We cannot reference the image directly as we did before. Instead, we specify the directory containing our custom Dockerfile as the build context:
 
     nano docker-compose.yml
 
+Docker compose configuration file.
 
     version: '3.7'
 
