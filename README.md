@@ -199,7 +199,3 @@ Docker compose configuration file.
 
 In the build section we define configurations that are applied at build time.
 
-
-
-
-                                ______________________________________
