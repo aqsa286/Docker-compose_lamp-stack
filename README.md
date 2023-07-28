@@ -62,45 +62,47 @@ Step-4:
           After declaring the compose file version, we started writing the service; inside of it we define the services which will compose our LAMP stack. We called the first service php-httpd. The service name is completely arbitrary, but is always a good habit to use one that is meaningful in the context of the project.
 The image instruction is used to specify on which image the container should be based, in this case php:7.3-apache.
 
-                  Cmd: echo "<?php phpinfo();" > DocumentRoot/index.php
-                  Cmd: sudo docker-compose up -d
+    echo "<?php phpinfo();" > DocumentRoot/index.php
+    
+    sudo docker-compose up -d
 
-       After executing the command, the needed docker image will be downloaded from dockerhub and the containers we will be created with the settings we provided and run in the background(they will not block terminal), because of using -d option we provided to the docker-compose command. 
+ After executing the command, the needed docker image will be downloaded from dockerhub and the containers we will be created with the settings we provided and run in the background(they will not block terminal), because of using -d option we provided to the docker-compose command. 
 Now after project up and running, if we navigate to localhost or ip on browser. 
 We will see php page.
 
 
 For stop project:
-     Cmd : sudo docker-compose stop
+
+    sudo docker-compose stop
 Defining the MariaDB service:
                   An essential part of the LAMP stack is the database layer. In our configuration we will use MariaDB and its official docker image available on dockerhub
 
-                  Cmd: nano docker-compose.yml
+    nano docker-compose.yml
 
-version: '3.7'
+    version: '3.7'
 
-services:
-    php-httpd:
-        image: php:7.3-apache
-        ports:
-            - 80:80
+    services:
+        php-httpd:
+            image: php:7.3-apache
+             ports:
+               - 80:80
+             volumes:
+               - "./DocumentRoot:/var/www/html"
+
+        mariadb:
+            image: mariadb:10.5.2
+            volumes:
+               - mariadb-volume:/var/lib/mysql
+            environment:
+               TZ: "Europe/Rome"
+               MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+               MYSQL_ROOT_PASSWORD: "rootpwd"
+               MYSQL_USER: 'testuser'
+               MYSQL_PASSWORD: 'testpassword'
+               MYSQL_DATABASE: 'testdb'
+
         volumes:
-            - "./DocumentRoot:/var/www/html"
-
-    mariadb:
-        image: mariadb:10.5.2
-        volumes:
-            - mariadb-volume:/var/lib/mysql
-        environment:
-            TZ: "Europe/Rome"
-            MYSQL_ALLOW_EMPTY_PASSWORD: "no"
-            MYSQL_ROOT_PASSWORD: "rootpwd"
-            MYSQL_USER: 'testuser'
-            MYSQL_PASSWORD: 'testpassword'
-            MYSQL_DATABASE: 'testdb'
-
-volumes:
-    mariadb-volume:
+          mariadb-volume:
 
 
 Bonus – phpMyAdmin:
