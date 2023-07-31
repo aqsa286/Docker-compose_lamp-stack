@@ -22,7 +22,7 @@ Create directory:
       
 :: Linuxconfig  → Inside this directory we will define docker-compose configuration file ‘docker-compose.yml’. We can use in the configuration file:
 * Services
-### Volumes
+** Volumes
 ### Networks
 
 #### Services
