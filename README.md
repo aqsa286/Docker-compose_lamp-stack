@@ -21,7 +21,7 @@ Create directory:
     mkdir -p linuxconfig/DocumentRoot
       
 :: Linuxconfig  → Inside this directory we will define docker-compose configuration file ‘docker-compose.yml’. We can use in the configuration file:
-* Services
+** Services
 ** Volumes
 ### Networks
 
