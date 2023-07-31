@@ -3,7 +3,7 @@
 ### Step-1: Installing packages and starting the docker service.
         
 First thing we have to do is to install the software we need: 
-*Docker* itself, and ***Docker-compose***, which is an utility that let us easily organize multi-container applications using yaml configuration files. 
+**Docker** itself, and **Docker-compose**, which is an utility that let us easily organize multi-container applications using yaml configuration files. 
 
 Install docker-compose package:
    
@@ -14,7 +14,7 @@ Start Service:
     
 ### Step-2: Project setup.
 
- First step we will create directory that will used as a root directory.  we will call it linuxconfig. Inside this directory we will create another one, DocumentRoot, which will host our website files. 
+First step we will create directory that will used as a root directory.  we will call it linuxconfig. Inside this directory we will create another one, DocumentRoot, which will host our website files. 
 
 Create directory:
 
@@ -24,7 +24,7 @@ Create directory:
 * Services
 * Volumes
 *  Networks
-
+- hlo
 #### Services
   A service definition contains the configuration that is applied to each container started for that service. Each service may also include a Build section, which defines how to create the Docker image for the service.
 
